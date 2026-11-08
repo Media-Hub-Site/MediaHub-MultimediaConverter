@@ -699,11 +699,4 @@ class AudioCutUI(QMainWindow):
         if hasattr(self, "parent_navigator") and self.parent_navigator:
             self.parent_navigator.go_home()
         else:
-            from core.ui.hub_window import HubWindow
-            try:
-                from apps.media_converter.ui.index import LauncherWindow
-                self.index_window = LauncherWindow()
-            except:
-                self.index_window = HubWindow()
-            self.index_window.show()
             self.close()
