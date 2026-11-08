@@ -4,14 +4,16 @@ from PyQt6.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout,
     QMessageBox, QStackedWidget, QFrame, QButtonGroup
 )
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon, QFont
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon
 
 from apps.media_converter.ui.audio_converter import AudioConverter
 from apps.media_converter.ui.video_converter import VideoConverter
 from apps.media_converter.ui.images_converter import ImageConverter
 from apps.media_converter.ui.image_rescaler import ImageRescaler
-from apps.media_converter.ui.audio_cut import AudioCutUI
+from apps.media_converter.ui.video_compressor import VideoCompressorUI
+from apps.media_converter.ui.gif_maker import GifMakerUI
+from apps.media_converter.ui.media_cutter import MediaCutterUI
 from apps.media_converter.ui.ui_theme import (
     get_app_colors,
     apply_window_theme,
@@ -19,13 +21,13 @@ from apps.media_converter.ui.ui_theme import (
 
 
 class LauncherWindow(QWidget):
-    """Ventana principal de Multimedia Converter con navegación por barra lateral moderna."""
+    """Ventana principal de Multimedia Converter con barra lateral moderna y suite de herramientas ampliada."""
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Multimedia Converter — Media Hub")
-        self.resize(1050, 750)
-        self.setMinimumSize(950, 680)
+        self.resize(1080, 760)
+        self.setMinimumSize(980, 680)
         apply_window_theme(self)
         self._colors = get_app_colors()
 
@@ -64,7 +66,7 @@ class LauncherWindow(QWidget):
         """)
         sidebar_layout = QVBoxLayout(sidebar)
         sidebar_layout.setContentsMargins(16, 24, 16, 20)
-        sidebar_layout.setSpacing(8)
+        sidebar_layout.setSpacing(6)
 
         # Header del Sidebar (Logo / Título)
         app_title = QLabel("MULTIMEDIA")
@@ -85,7 +87,7 @@ class LauncherWindow(QWidget):
             letter-spacing: 2px;
             background: transparent;
             border: none;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         """)
         sidebar_layout.addWidget(app_title)
         sidebar_layout.addWidget(app_subtitle)
@@ -95,33 +97,35 @@ class LauncherWindow(QWidget):
         sep.setFixedHeight(1)
         sep.setStyleSheet(f"background-color: {self._colors['border']}; border: none;")
         sidebar_layout.addWidget(sep)
-        sidebar_layout.addSpacing(10)
+        sidebar_layout.addSpacing(8)
 
         # Botones de Navegación de Herramientas
         nav_items = [
-            ("video", "🎬  Video", "VideoIcon.png", VideoConverter),
-            ("audio", "🎵  Audio", "AudioIcon.png", AudioConverter),
-            ("image", "🖼️  Imágenes", "ImagenIcon.png", ImageConverter),
-            ("rescaler", "🔍  Reescalar IA", "Upscaler.png", ImageRescaler),
-            ("audiocut", "✂️  Cortar Audio", "audiocut.webp", AudioCutUI),
+            ("video", "🎬  Video", VideoConverter),
+            ("audio", "🎵  Audio", AudioConverter),
+            ("image", "🖼️  Imágenes", ImageConverter),
+            ("compressor", "🗜️  Compresor Video", VideoCompressorUI),
+            ("gif_maker", "🎞️  Creador de GIF", GifMakerUI),
+            ("media_cut", "✂️  Cortador Multimedia", MediaCutterUI),
+            ("rescaler", "🔍  Reescalar Imagen", ImageRescaler),
         ]
 
         self.btn_group = QButtonGroup(self)
         self.btn_group.setExclusive(True)
 
-        for key, label, icon_name, widget_cls in nav_items:
+        for key, label, widget_cls in nav_items:
             btn = QPushButton(f"  {label}")
             btn.setCheckable(True)
             btn.setCursor(Qt.CursorShape.PointingHandCursor)
-            btn.setFixedHeight(44)
+            btn.setFixedHeight(42)
             btn.setStyleSheet(f"""
                 QPushButton {{
                     background: transparent;
                     color: {self._colors['text_muted']};
                     text-align: left;
-                    padding-left: 14px;
-                    border-radius: 10px;
-                    font-size: 10.5pt;
+                    padding-left: 12px;
+                    border-radius: 9px;
+                    font-size: 10pt;
                     font-weight: 600;
                     border: none;
                 }}
@@ -146,15 +150,15 @@ class LauncherWindow(QWidget):
         # Botón inferior para Salir
         exit_btn = QPushButton("  🚪  Salir")
         exit_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        exit_btn.setFixedHeight(40)
+        exit_btn.setFixedHeight(38)
         exit_btn.setStyleSheet(f"""
             QPushButton {{
                 background: transparent;
                 color: {self._colors['text_muted']};
                 text-align: left;
                 padding-left: 14px;
-                border-radius: 10px;
-                font-size: 10pt;
+                border-radius: 9px;
+                font-size: 9.5pt;
                 font-weight: 600;
                 border: 1px solid {self._colors['border']};
             }}
@@ -176,7 +180,7 @@ class LauncherWindow(QWidget):
 
         # Seleccionar por defecto la primera herramienta (Video)
         if nav_items:
-            first_key, _, _, first_cls = nav_items[0]
+            first_key, _, first_cls = nav_items[0]
             self.nav_buttons[first_key].setChecked(True)
             self.switch_view(first_key, first_cls)
 
@@ -186,7 +190,7 @@ class LauncherWindow(QWidget):
             try:
                 tool_widget = ToolClass()
                 tool_widget.parent_navigator = self
-                # Ocultar botón de volver interno si existe, ya que ahora tenemos la barra lateral
+                # Ocultar botones de volver internos si existen
                 for btn in tool_widget.findChildren(QPushButton):
                     text = btn.text().lower()
                     if "volver" in text or "←" in text:
