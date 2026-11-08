@@ -14,6 +14,8 @@ from apps.media_converter.ui.image_rescaler import ImageRescaler
 from apps.media_converter.ui.video_compressor import VideoCompressorUI
 from apps.media_converter.ui.gif_maker import GifMakerUI
 from apps.media_converter.ui.media_cutter import MediaCutterUI
+from apps.media_converter.ui.audio_booster import AudioBoosterUI
+from apps.media_converter.ui.media_merger import MediaMergerUI
 from apps.media_converter.ui.ui_theme import (
     get_app_colors,
     apply_window_theme,
@@ -21,13 +23,13 @@ from apps.media_converter.ui.ui_theme import (
 
 
 class LauncherWindow(QWidget):
-    """Ventana principal de Multimedia Converter con barra lateral moderna y suite de herramientas ampliada."""
+    """Ventana principal de Multimedia Converter con barra lateral moderna y suite completa de herramientas."""
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Multimedia Converter — Media Hub")
-        self.resize(1080, 760)
-        self.setMinimumSize(980, 680)
+        self.resize(1120, 780)
+        self.setMinimumSize(1000, 700)
         apply_window_theme(self)
         self._colors = get_app_colors()
 
@@ -65,8 +67,8 @@ class LauncherWindow(QWidget):
             }}
         """)
         sidebar_layout = QVBoxLayout(sidebar)
-        sidebar_layout.setContentsMargins(16, 24, 16, 20)
-        sidebar_layout.setSpacing(6)
+        sidebar_layout.setContentsMargins(16, 22, 16, 18)
+        sidebar_layout.setSpacing(5)
 
         # Header del Sidebar (Logo / Título)
         app_title = QLabel("MULTIMEDIA")
@@ -87,7 +89,7 @@ class LauncherWindow(QWidget):
             letter-spacing: 2px;
             background: transparent;
             border: none;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         """)
         sidebar_layout.addWidget(app_title)
         sidebar_layout.addWidget(app_subtitle)
@@ -97,7 +99,7 @@ class LauncherWindow(QWidget):
         sep.setFixedHeight(1)
         sep.setStyleSheet(f"background-color: {self._colors['border']}; border: none;")
         sidebar_layout.addWidget(sep)
-        sidebar_layout.addSpacing(8)
+        sidebar_layout.addSpacing(6)
 
         # Botones de Navegación de Herramientas
         nav_items = [
@@ -107,6 +109,8 @@ class LauncherWindow(QWidget):
             ("compressor", "🗜️  Compresor Video", VideoCompressorUI),
             ("gif_maker", "🎞️  Creador de GIF", GifMakerUI),
             ("media_cut", "✂️  Cortador Multimedia", MediaCutterUI),
+            ("booster", "🔊  Amplificador Audio", AudioBoosterUI),
+            ("merger", "🧩  Unificador Media", MediaMergerUI),
             ("rescaler", "🔍  Reescalar Imagen", ImageRescaler),
         ]
 
@@ -117,15 +121,15 @@ class LauncherWindow(QWidget):
             btn = QPushButton(f"  {label}")
             btn.setCheckable(True)
             btn.setCursor(Qt.CursorShape.PointingHandCursor)
-            btn.setFixedHeight(42)
+            btn.setFixedHeight(38)
             btn.setStyleSheet(f"""
                 QPushButton {{
                     background: transparent;
                     color: {self._colors['text_muted']};
                     text-align: left;
                     padding-left: 12px;
-                    border-radius: 9px;
-                    font-size: 10pt;
+                    border-radius: 8px;
+                    font-size: 9.5pt;
                     font-weight: 600;
                     border: none;
                 }}
