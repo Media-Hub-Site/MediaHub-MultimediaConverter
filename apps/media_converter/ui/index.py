@@ -20,6 +20,7 @@ from apps.media_converter.ui.ui_theme import (
     get_app_colors,
     apply_window_theme,
 )
+from apps.media_converter.i18n import t, get_current_language
 
 
 class LauncherWindow(QWidget):
