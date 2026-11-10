@@ -103,7 +103,7 @@ class AudioBoosterUI(QWidget):
 
         card, card_layout = make_card_container()
 
-        header = QLabel("🔊 Amplificador de Volumen")
+        header = QLabel("Amplificador de Volumen")
         header.setStyleSheet(f"font-size: 19pt; font-weight: 800; color: {self._colors['text_main']};")
         desc = QLabel("Sube el volumen de grabaciones bajas y normaliza niveles desiguales en audios y videos.")
         desc.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 10.5pt;")
@@ -129,7 +129,7 @@ class AudioBoosterUI(QWidget):
         drop_layout = QVBoxLayout(self.drop_zone)
         drop_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.drop_label = QLabel("📁 Arrastra un archivo de audio o video aquí")
+        self.drop_label = QLabel("Arrastra un archivo de audio o video aquí")
         self.drop_label.setStyleSheet(f"color: {self._colors['text_main']}; font-size: 11pt; font-weight: 600;")
         self.file_info_label = QLabel("Soporta MP3, WAV, M4A, FLAC, MP4, MKV y más")
         self.file_info_label.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 9pt;")
@@ -150,7 +150,7 @@ class AudioBoosterUI(QWidget):
         opts_layout = QVBoxLayout(opts_box)
         opts_layout.setSpacing(12)
 
-        lbl_gain = QLabel("🎚️ Multiplicador de Volumen:")
+        lbl_gain = QLabel("Multiplicador de Volumen:")
         lbl_gain.setStyleSheet(f"color: {self._colors['text_main']}; font-weight: 700; font-size: 10.5pt;")
         opts_layout.addWidget(lbl_gain)
 
@@ -188,7 +188,7 @@ class AudioBoosterUI(QWidget):
         slider_row.addWidget(self.lbl_slider_val)
         opts_layout.addLayout(slider_row)
 
-        self.chk_norm = QCheckBox("✨ Normalización inteligente EBU R128 (Equilibra voces bajas y picos altos)")
+        self.chk_norm = QCheckBox("Normalización inteligente EBU R128 (Equilibra voces bajas y picos altos)")
         self.chk_norm.setChecked(True)
         self.chk_norm.setStyleSheet(f"color: {self._colors['text_muted']}; font-weight: 600; font-size: 9.5pt;")
         opts_layout.addWidget(self.chk_norm)
@@ -222,7 +222,7 @@ class AudioBoosterUI(QWidget):
         bottom_layout = QHBoxLayout()
         bottom_layout.addStretch()
 
-        self.btn_boost = QPushButton("🔊 Aplicar y Guardar")
+        self.btn_boost = QPushButton("Aplicar y Guardar")
         self.btn_boost.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_boost.setFixedHeight(46)
         self.btn_boost.setFixedWidth(220)
@@ -278,7 +278,7 @@ class AudioBoosterUI(QWidget):
     def _set_file(self, file_path):
         self.file_path = file_path
         name = os.path.basename(file_path)
-        self.drop_label.setText(f"📁 {name}")
+        self.drop_label.setText(name)
         self.file_info_label.setText("Listo para amplificar y normalizar volumen")
         self.btn_boost.setEnabled(True)
         self.status_label.setText("")
@@ -316,7 +316,7 @@ class AudioBoosterUI(QWidget):
         self.btn_boost.setEnabled(True)
         self.drop_zone.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("✅ Archivo amplificado guardado con éxito")
+        self.status_label.setText("Archivo amplificado guardado con éxito")
         QMessageBox.information(
             self, "Volumen Amplificado",
             f"El archivo se procesó correctamente:\n\n{output_path}"
@@ -326,5 +326,5 @@ class AudioBoosterUI(QWidget):
         self.btn_boost.setEnabled(True)
         self.drop_zone.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("❌ Error al procesar")
+        self.status_label.setText("Error al procesar")
         QMessageBox.critical(self, "Error", f"Ocurrió un error al amplificar el audio:\n{err}")

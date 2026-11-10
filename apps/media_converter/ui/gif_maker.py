@@ -92,7 +92,7 @@ class GifMakerUI(QWidget):
         card, card_layout = make_card_container()
 
         # Header
-        header = QLabel("🎞️ Creador de GIF")
+        header = QLabel("Creador de GIF")
         header.setStyleSheet(f"font-size: 19pt; font-weight: 800; color: {self._colors['text_main']};")
         desc = QLabel("Convierte fragmentos de video en GIFs fluidos de alta definición sin colores pixelados.")
         desc.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 10.5pt;")
@@ -118,7 +118,7 @@ class GifMakerUI(QWidget):
         drop_layout = QVBoxLayout(self.drop_zone)
         drop_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.drop_label = QLabel("📁 Arrastra el video para convertir a GIF")
+        self.drop_label = QLabel("Arrastra el video para convertir a GIF")
         self.drop_label.setStyleSheet(f"color: {self._colors['text_main']}; font-size: 11pt; font-weight: 600;")
         self.file_info_label = QLabel("Soporta MP4, MKV, MOV, AVI, WebM")
         self.file_info_label.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 9pt;")
@@ -139,7 +139,7 @@ class GifMakerUI(QWidget):
         opts_layout = QVBoxLayout(opts_box)
         opts_layout.setSpacing(12)
 
-        lbl_opts = QLabel("⚙️ Ajustes del GIF:")
+        lbl_opts = QLabel("Ajustes del GIF:")
         lbl_opts.setStyleSheet(f"color: {self._colors['text_main']}; font-weight: 700; font-size: 10.5pt;")
         opts_layout.addWidget(lbl_opts)
 
@@ -220,7 +220,7 @@ class GifMakerUI(QWidget):
         bottom_layout = QHBoxLayout()
         bottom_layout.addStretch()
 
-        self.btn_create_gif = QPushButton("✨ Crear GIF")
+        self.btn_create_gif = QPushButton("Crear GIF")
         self.btn_create_gif.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_create_gif.setFixedHeight(46)
         self.btn_create_gif.setFixedWidth(220)
@@ -284,7 +284,7 @@ class GifMakerUI(QWidget):
     def _set_file(self, file_path):
         self.file_path = file_path
         name = os.path.basename(file_path)
-        self.drop_label.setText(f"🎬 {name}")
+        self.drop_label.setText(name)
         self.file_info_label.setText("Video seleccionado para extracción de GIF")
         self.btn_create_gif.setEnabled(True)
         self.status_label.setText("")
@@ -331,7 +331,7 @@ class GifMakerUI(QWidget):
         self.drop_zone.setEnabled(True)
         self.progress_bar.setVisible(False)
         size_kb = os.path.getsize(output_path) / 1024
-        self.status_label.setText(f"✅ GIF generado: {size_kb:.1f} KB")
+        self.status_label.setText(f"GIF generado: {size_kb:.1f} KB")
         QMessageBox.information(
             self, "GIF Creado",
             f"Tu GIF de alta definición se ha creado correctamente.\n\n"
@@ -342,5 +342,5 @@ class GifMakerUI(QWidget):
         self.btn_create_gif.setEnabled(True)
         self.drop_zone.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("❌ Error al crear GIF")
+        self.status_label.setText("Error al crear GIF")
         QMessageBox.critical(self, "Error", f"Ocurrió un error al generar el GIF:\n{err}")

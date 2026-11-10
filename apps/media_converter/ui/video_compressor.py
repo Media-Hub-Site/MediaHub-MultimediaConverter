@@ -131,7 +131,7 @@ class VideoCompressorUI(QWidget):
         card, card_layout = make_card_container()
 
         # Header
-        header = QLabel("🗜️ Compresor de Video")
+        header = QLabel("Compresor de Video")
         header.setStyleSheet(f"font-size: 19pt; font-weight: 800; color: {self._colors['text_main']};")
         desc = QLabel("Reduce el tamaño de tus videos para Discord, WhatsApp o Web manteniendo la mejor nitidez.")
         desc.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 10.5pt;")
@@ -157,7 +157,7 @@ class VideoCompressorUI(QWidget):
         drop_layout = QVBoxLayout(self.drop_zone)
         drop_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.drop_label = QLabel("📁 Arrastra tu video aquí o haz clic para seleccionar")
+        self.drop_label = QLabel("Arrastra tu video aquí o haz clic para seleccionar")
         self.drop_label.setStyleSheet(f"color: {self._colors['text_main']}; font-size: 11pt; font-weight: 600;")
         self.file_info_label = QLabel("Soporta MP4, MKV, MOV, AVI, WebM")
         self.file_info_label.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 9pt;")
@@ -179,7 +179,7 @@ class VideoCompressorUI(QWidget):
         opts_layout = QVBoxLayout(opts_box)
         opts_layout.setSpacing(12)
 
-        lbl_opts = QLabel("🎯 Método de compresión:")
+        lbl_opts = QLabel("Método de compresión:")
         lbl_opts.setStyleSheet(f"color: {self._colors['text_main']}; font-weight: 700; font-size: 10.5pt;")
         opts_layout.addWidget(lbl_opts)
 
@@ -270,7 +270,7 @@ class VideoCompressorUI(QWidget):
         bottom_layout = QHBoxLayout()
         bottom_layout.addStretch()
 
-        self.btn_compress = QPushButton("🚀 Iniciar Compresión")
+        self.btn_compress = QPushButton("Iniciar Compresión")
         self.btn_compress.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_compress.setFixedHeight(46)
         self.btn_compress.setFixedWidth(220)
@@ -330,7 +330,7 @@ class VideoCompressorUI(QWidget):
         self.file_path = file_path
         name = os.path.basename(file_path)
         size_mb = os.path.getsize(file_path) / (1024 * 1024)
-        self.drop_label.setText(f"🎬 {name}")
+        self.drop_label.setText(name)
         self.file_info_label.setText(f"Tamaño original: {size_mb:.2f} MB")
         self.btn_compress.setEnabled(True)
         self.status_label.setText("")
@@ -375,7 +375,7 @@ class VideoCompressorUI(QWidget):
         orig_mb = os.path.getsize(self.file_path) / (1024 * 1024)
         new_mb = os.path.getsize(output_path) / (1024 * 1024)
         saved = ((orig_mb - new_mb) / orig_mb) * 100 if orig_mb > 0 else 0
-        self.status_label.setText(f"✅ Guardado: {new_mb:.2f} MB (Ahorro del {saved:.1f}%)")
+        self.status_label.setText(f"Guardado: {new_mb:.2f} MB (Ahorro del {saved:.1f}%)")
         QMessageBox.information(
             self, "Compresión Exitosa",
             f"El video se comprimió correctamente:\n\n"
@@ -388,5 +388,5 @@ class VideoCompressorUI(QWidget):
         self.btn_compress.setEnabled(True)
         self.drop_zone.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("❌ Error al comprimir")
+        self.status_label.setText("Error al comprimir")
         QMessageBox.critical(self, "Error", f"Ocurrió un error al procesar el video:\n{err}")
