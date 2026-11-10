@@ -21,6 +21,7 @@ from apps.media_converter.ui.ui_theme import (
     apply_window_theme,
 )
 from apps.media_converter.i18n import t, get_current_language
+from core.sound_manager import SoundManager
 
 
 class LauncherWindow(QWidget):
@@ -191,6 +192,7 @@ class LauncherWindow(QWidget):
 
     def switch_view(self, tool_id: str, ToolClass):
         """Cambia suavemente a la herramienta seleccionada en el sidebar."""
+        SoundManager.instance().play("click")
         if tool_id not in self.loaded_pages:
             try:
                 tool_widget = ToolClass()
