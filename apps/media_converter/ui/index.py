@@ -27,7 +27,7 @@ class LauncherWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Multimedia Converter — Media Hub")
+        self.setWindowTitle(t("app_title"))
         self.resize(1120, 780)
         self.setMinimumSize(1000, 700)
         apply_window_theme(self)
@@ -103,15 +103,15 @@ class LauncherWindow(QWidget):
 
         # Botones de Navegación de Herramientas
         nav_items = [
-            ("video", "Video", VideoConverter),
-            ("audio", "Audio", AudioConverter),
-            ("image", "Imágenes", ImageConverter),
-            ("compressor", "Compresor Video", VideoCompressorUI),
-            ("gif_maker", "Creador de GIF", GifMakerUI),
-            ("media_cut", "Cortador Multimedia", MediaCutterUI),
-            ("booster", "Amplificador Audio", AudioBoosterUI),
-            ("merger", "Unificador Media", MediaMergerUI),
-            ("rescaler", "Reescalar Imagen", ImageRescaler),
+            ("video", t("nav_video"), VideoConverter),
+            ("audio", t("nav_audio"), AudioConverter),
+            ("image", t("nav_image"), ImageConverter),
+            ("compressor", t("nav_compressor"), VideoCompressorUI),
+            ("gif_maker", t("nav_gif_maker"), GifMakerUI),
+            ("media_cut", t("nav_media_cut"), MediaCutterUI),
+            ("booster", t("nav_booster"), AudioBoosterUI),
+            ("merger", t("nav_merger"), MediaMergerUI),
+            ("rescaler", t("nav_rescaler"), ImageRescaler),
         ]
 
         self.btn_group = QButtonGroup(self)
@@ -152,7 +152,7 @@ class LauncherWindow(QWidget):
         sidebar_layout.addStretch()
 
         # Botón inferior para Salir
-        exit_btn = QPushButton("  Salir")
+        exit_btn = QPushButton(f"  {t('btn_exit')}")
         exit_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         exit_btn.setFixedHeight(38)
         exit_btn.setStyleSheet(f"""
