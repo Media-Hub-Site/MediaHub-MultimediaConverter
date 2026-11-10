@@ -119,7 +119,7 @@ class MediaMergerUI(QWidget):
 
         card, card_layout = make_card_container()
 
-        header = QLabel("🧩 Unificador Multimedia")
+        header = QLabel("Unificador Multimedia")
         header.setStyleSheet(f"font-size: 19pt; font-weight: 800; color: {self._colors['text_main']};")
         desc = QLabel("Une varios clips de video o canciones en un único archivo continuo y ordenado.")
         desc.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 10.5pt;")
@@ -134,7 +134,7 @@ class MediaMergerUI(QWidget):
         top_list_row.addWidget(self.lbl_count)
         top_list_row.addStretch()
 
-        btn_add = QPushButton("➕ Añadir Archivos")
+        btn_add = QPushButton("Añadir Archivos")
         btn_add.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_add.setStyleSheet(f"""
             QPushButton {{
@@ -153,7 +153,7 @@ class MediaMergerUI(QWidget):
         btn_add.clicked.connect(self.select_files)
         top_list_row.addWidget(btn_add)
 
-        btn_clear = QPushButton("🗑️ Limpiar")
+        btn_clear = QPushButton("Limpiar")
         btn_clear.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_clear.setStyleSheet(f"""
             QPushButton {{
@@ -225,7 +225,7 @@ class MediaMergerUI(QWidget):
         bottom_layout = QHBoxLayout()
         bottom_layout.addStretch()
 
-        self.btn_merge = QPushButton("🧩 Fusionar Archivos")
+        self.btn_merge = QPushButton("Fusionar Archivos")
         self.btn_merge.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_merge.setFixedHeight(46)
         self.btn_merge.setFixedWidth(220)
@@ -324,7 +324,7 @@ class MediaMergerUI(QWidget):
     def _on_success(self, output_path):
         self.btn_merge.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("✅ Archivos unidos correctamente")
+        self.status_label.setText("Archivos unidos correctamente")
         QMessageBox.information(
             self, "Fusión Exitosa",
             f"Se unieron los {len(self.files)} archivos correctamente en:\n\n{output_path}"
@@ -333,5 +333,5 @@ class MediaMergerUI(QWidget):
     def _on_error(self, err):
         self.btn_merge.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("❌ Error al unir archivos")
+        self.status_label.setText("Error al unir archivos")
         QMessageBox.critical(self, "Error", f"Ocurrió un error al fusionar los archivos:\n{err}")

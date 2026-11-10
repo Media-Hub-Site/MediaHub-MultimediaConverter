@@ -103,7 +103,7 @@ class MediaCutterUI(QWidget):
 
         card, card_layout = make_card_container()
 
-        header = QLabel("✂️ Cortador Multimedia")
+        header = QLabel("Cortador Multimedia")
         header.setStyleSheet(f"font-size: 19pt; font-weight: 800; color: {self._colors['text_main']};")
         desc = QLabel("Recorta fragmentos de cualquier video o audio sin perder calidad y en cuestión de segundos.")
         desc.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 10.5pt;")
@@ -129,7 +129,7 @@ class MediaCutterUI(QWidget):
         drop_layout = QVBoxLayout(self.drop_zone)
         drop_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.drop_label = QLabel("📁 Arrastra un video o audio aquí para recortar")
+        self.drop_label = QLabel("Arrastra un video o audio aquí para recortar")
         self.drop_label.setStyleSheet(f"color: {self._colors['text_main']}; font-size: 11pt; font-weight: 600;")
         self.file_info_label = QLabel("Soporta MP4, MKV, MOV, MP3, WAV, AAC, FLAC, OGG y más")
         self.file_info_label.setStyleSheet(f"color: {self._colors['text_muted']}; font-size: 9pt;")
@@ -179,7 +179,7 @@ class MediaCutterUI(QWidget):
         row_time.addStretch()
         opts_layout.addLayout(row_time)
 
-        self.chk_lossless = QCheckBox("⚡ Modo Ultra Rápido sin pérdida (Stream Copy directo)")
+        self.chk_lossless = QCheckBox("Modo Ultra Rápido sin pérdida (Stream Copy directo)")
         self.chk_lossless.setChecked(True)
         self.chk_lossless.setStyleSheet(f"color: {self._colors['text_muted']}; font-weight: 600; font-size: 9.5pt;")
         opts_layout.addWidget(self.chk_lossless)
@@ -213,7 +213,7 @@ class MediaCutterUI(QWidget):
         bottom_layout = QHBoxLayout()
         bottom_layout.addStretch()
 
-        self.btn_cut = QPushButton("✂️ Recortar Archivo")
+        self.btn_cut = QPushButton("Recortar Archivo")
         self.btn_cut.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_cut.setFixedHeight(46)
         self.btn_cut.setFixedWidth(220)
@@ -275,7 +275,7 @@ class MediaCutterUI(QWidget):
     def _set_file(self, file_path):
         self.file_path = file_path
         name = os.path.basename(file_path)
-        self.drop_label.setText(f"📁 {name}")
+        self.drop_label.setText(name)
         self.file_info_label.setText("Archivo listo para recortar")
         self.btn_cut.setEnabled(True)
         self.status_label.setText("")
@@ -319,7 +319,7 @@ class MediaCutterUI(QWidget):
         self.btn_cut.setEnabled(True)
         self.drop_zone.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("✅ Archivo recortado guardado con éxito")
+        self.status_label.setText("Archivo recortado guardado con éxito")
         QMessageBox.information(
             self, "Recorte Completado",
             f"El fragmento se ha recortado correctamente:\n\n{output_path}"
@@ -329,5 +329,5 @@ class MediaCutterUI(QWidget):
         self.btn_cut.setEnabled(True)
         self.drop_zone.setEnabled(True)
         self.progress_bar.setVisible(False)
-        self.status_label.setText("❌ Error al recortar")
+        self.status_label.setText("Error al recortar")
         QMessageBox.critical(self, "Error", f"Ocurrió un error al recortar el archivo:\n{err}")
